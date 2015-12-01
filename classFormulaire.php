@@ -140,8 +140,51 @@ class FormulaireHTML extends Element {
 		return $el;
 	}
 
-	public function champTypeRadio() {
+	public function champTypeRadio($name, $values, $labels, $label='') {
+		$fieldset = new Element('fieldset');
+		$els = array();
 
+		if ($label != '') {
+			$legend = new Element('legend');
+			$legend->setContent($label);
+			$els[] = $legend;
+		}
+
+		$ol = new Element('ol');
+
+		foreach ($values as $key => $value) {
+			$elsLi = array();
+
+			$id = 'rd_' . $value; 
+
+			$el = new Element('input');
+			$el->addAttr('type', 'radio');
+			$el->addAttr('value', $value);
+			$el->addAttr('id', $id);
+			$el->addAttr('name', $name);
+
+			$elsLi[] = $el;
+
+			if (isset($labels[$key])) {
+				$label = new Element('label');
+				$label->addAttr('for', $id);
+				$label->setContent($labels[$key]);
+
+				$elsLi[] = $label;
+			}
+
+			$li = new Element('li');
+			$li->setChilds($elsLi);
+			$ol->addChild($li);
+		}
+
+		$els[] = $ol;
+
+		$fieldset->setChilds($els);
+
+		$this->addElementsInOl(array($fieldset));
+
+		return $els;
 	}
 
 	public function champTypeHidden() {

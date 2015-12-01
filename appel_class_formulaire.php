@@ -26,6 +26,12 @@ function main() {
 		'Couleurs préférées : '
 	);
 	$formulaire->champTypeFile('img', 'Image de profile : ', 'image/png, image/gif, image/jpeg');
+	$formulaire->champTypeRadio(
+		'boisson',
+		['cafe', 'the', 'chocolat', 'eau', 'biere'],
+		['Café', 'Thé', 'Chocolat chaud', 'Eau minérale', 'Bière'],
+		'Boisson préférée : '
+	);
 
 	$formulaire->afficheFormulaireHTML();
 }
