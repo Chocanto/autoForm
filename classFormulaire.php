@@ -198,12 +198,26 @@ class FormulaireHTML extends Element {
 		return $el;
 	}
 
-	public function boutonAnnuler() {
+	public function boutonAnnuler($value='') {
+		$el = new Element('input');
+		$el->addAttr('type', 'reset');
+		if ($value != '')
+			$el->addAttr('value', $value);
 
+		$this->addChild($el);
+
+		return $el;
 	}
 
-	public function boutonValider() {
+	public function boutonValider($value='') {
+		$el = new Element('input');
+		$el->addAttr('type', 'submit');
+		if ($value != '')
+			$el->addAttr('value', $value);
 
+		$this->addChild($el);
+
+		return $el;
 	}
 
 	public function afficheFormulaireHTML() {
@@ -211,7 +225,7 @@ class FormulaireHTML extends Element {
 	}
 
 	public function getCptElements() {
-
+		return count($this->getChilds());
 	}
 
 	protected function addElementsInOl($arr) {

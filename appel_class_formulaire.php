@@ -34,6 +34,9 @@ function main() {
 	);
 	$formulaire->champTypeHidden('cache', 'coucou');
 
+	$formulaire->boutonAnnuler();
+	$formulaire->boutonValider('Envoyer');
+
 	$formulaire->afficheFormulaireHTML();
 }
 
