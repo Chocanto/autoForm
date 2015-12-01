@@ -187,8 +187,15 @@ class FormulaireHTML extends Element {
 		return $els;
 	}
 
-	public function champTypeHidden() {
+	public function champTypeHidden($name, $value) {
+		$el = new Element('input');
+		$el->addAttr('type', 'hidden');
+		$el->addAttr('name', $name);
+		$el->addAttr('value', $value);
 
+		$this->addChild($el);
+
+		return $el;
 	}
 
 	public function boutonAnnuler() {

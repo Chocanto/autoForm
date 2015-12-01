@@ -32,6 +32,7 @@ function main() {
 		['Café', 'Thé', 'Chocolat chaud', 'Eau minérale', 'Bière'],
 		'Boisson préférée : '
 	);
+	$formulaire->champTypeHidden('cache', 'coucou');
 
 	$formulaire->afficheFormulaireHTML();
 }
