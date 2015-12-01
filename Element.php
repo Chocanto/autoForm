@@ -4,6 +4,7 @@ class Element {
 	protected $type;
 	protected $childs;
 	protected $attr;
+	protected $content = '';
 
 	public function __construct($type) {
 		$this->type = $type;
@@ -25,6 +26,7 @@ class Element {
 
 	public function render() {
 		$this->renderStart();
+		$this->renderContent();
 		$this->renderChilds();
 		$this->renderEnd();
 	}
@@ -48,6 +50,10 @@ class Element {
 		}
 	}
 
+	protected function renderContent() {
+		echo $this->content;
+	}
+
 	/**SETTERS**/
 	public function setType($type) {
 		$this->type = $type;
@@ -61,6 +67,10 @@ class Element {
 		$this->attributes = $attributes;
 	}
 
+	public function setContent($ctn) {
+		$this->content = $ctn;
+	}
+
 	/**GETTERS**/
 	public function getType() { return $this->type; }
 
@@ -69,4 +79,6 @@ class Element {
 	public function getAttributes() { return $this->attr; }
 
 	public function getAttribute($name) { return $this->attr[$name]; }
+
+	public function getContent() { return $this->content; }
 }
