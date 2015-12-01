@@ -28,7 +28,7 @@ class FormulaireHTML extends Element {
 		return $el;
 	}
 
-	public function champTypeText($name='', $label='', $value='') {
+	public function champTypeText($name, $label='', $value='') {
 		$el = new Element('input');
 		$el->addAttr('type', 'text');
 		$el->addAttr('name', $name);
@@ -39,16 +39,71 @@ class FormulaireHTML extends Element {
 		return $el;
 	}
 
-	public function champTypePassword() {
-		
+	public function champTypePassword($name, $label='') {
+		$el = new Element('input');
+		$el->addAttr('type', 'password');
+		$el->addAttr('name', $name);
+
+		$this->addBasicChamp('pass_', $name, $el, $label);
+
+		return $el;
 	}
 
-	public function champTypeTextarea() {
+	public function champTypeTextarea($name, $label='', $value='') {
+		$el = new Element('textarea');
+		$el->addAttr('name', $name);
+		if ($value != '')
+			$el->setContent($value);
 
+		$this->addBasicChamp('txtarea_', $name, $el, $label);
+
+		return $el;
 	}
 
-	public function champTypeCheckBox() {
+	public function champTypeCheckBox($values, $labels, $label='') {
+		$fieldset = new Element('fieldset');
+		$els = array();
 
+		if ($label != '') {
+			$legend = new Element('legend');
+			$legend->setContent($label);
+			$els[] = $legend;
+		}
+
+		$ol = new Element('ol');
+
+		foreach ($values as $key => $value) {
+			$elsLi = array();
+
+			$id = 'chck_' . $value; 
+
+			$el = new Element('input');
+			$el->addAttr('type', 'checkbox');
+			$el->addAttr('value', $value);
+			$el->addAttr('id', $id);
+
+			$elsLi[] = $el;
+
+			if (isset($labels[$key])) {
+				$label = new Element('label');
+				$label->addAttr('for', $id);
+				$label->setContent($labels[$key]);
+
+				$elsLi[] = $label;
+			}
+
+			$li = new Element('li');
+			$li->setChilds($elsLi);
+			$ol->addChild($li);
+		}
+
+		$els[] = $ol;
+
+		$fieldset->setChilds($els);
+
+		$this->addElementsInOl(array($fieldset));
+
+		return $els;
 	}
 
 	public function champTypeSelectSimple() {

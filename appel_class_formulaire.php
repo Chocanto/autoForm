@@ -5,9 +5,14 @@ require_once('classFormulaire.php');
 function main() {
 	$formulaire = new FormulaireHTML();
 
-	$formulaire->champTypeText('nom_variable', 'Variable test : ', 'test');
-
-	$formulaire->champTypeText('variable_2', 'Variable 2 : ', 'test 2');
+	$formulaire->champTypeText('login', 'Login : ');
+	$formulaire->champTypePassword('password', 'Mot de passe : ');
+	$formulaire->champTypeTextarea('description', 'Description : ');
+	$formulaire->champTypeCheckbox(
+		['matin', 'aprem', 'soiree', 'nuit'],
+		['Matin', 'Après-midi', 'Soirée', 'Nuit'],
+		'Disponibilités : '
+	);
 
 	$formulaire->afficheFormulaireHTML();
 }
