@@ -13,6 +13,19 @@ function main() {
 		['Matin', 'Après-midi', 'Soirée', 'Nuit'],
 		'Disponibilités : '
 	);
+	$formulaire->champTypeSelectSimple(
+		'sexe',
+		['masc', 'fem', 'inc'],
+		['Masculin', 'Féminin', 'Inconnu'],
+		'Sexe : '
+	);
+	$formulaire->champTypeSelectMultiple(
+		'couleur',
+		['rouge', 'vert', 'bleu', 'jaune'],
+		['Rouge', 'Vert', 'Bleu', 'Jaune'],
+		'Couleurs préférées : '
+	);
+	$formulaire->champTypeFile('img', 'Image de profile : ', 'image/png, image/gif, image/jpeg');
 
 	$formulaire->afficheFormulaireHTML();
 }

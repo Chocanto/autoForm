@@ -106,16 +106,38 @@ class FormulaireHTML extends Element {
 		return $els;
 	}
 
-	public function champTypeSelectSimple() {
+	public function champTypeSelectSimple($name, $values, $labels, $label='', $multiple=false) {
+		$select = new Element('select');
+		$select->addAttr('name', $name);
+		if ($multiple)
+			$select->addAttr('multiple', 'true');
 
+		foreach ($values as $key => $value) {
+			$option = new Element('option');
+			$option->addAttr('value', $value);
+			if (isset($labels[$key]))
+				$option->setContent($labels[$key]);
+
+			$select->addChild($option);
+		}
+
+		$this->addBasicChamp('sel_', $name, $select, $label);
 	}
 
-	public function champTypeSelectMultiple() {
-
+	public function champTypeSelectMultiple($name, $values, $labels, $label='') {
+		$this->champTypeSelectSimple($name, $values, $labels, $label, true);
 	}
 
-	public function champTypeFile() {
+	public function champTypeFile($name, $label='', $accept='') {
+		$el = new Element('input');
+		$el->addAttr('type', 'file');
+		$el->addAttr('name', $name);
+		if ($accept != '')
+			$el->addAttr('accept', $accept);
 
+		$this->addBasicChamp('file_', $name, $el, $label);
+
+		return $el;
 	}
 
 	public function champTypeRadio() {
